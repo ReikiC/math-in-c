@@ -1,39 +1,35 @@
 # Math in C
 
-用 C 学习数学，从数学理解到代码编写一步到位。
+用 C 学习数学 — 在 Jupyter 里写公式、跑代码，Quarto 自动渲染成带输出结果的笔记网站。
 
 ## 本地开发
-
-需要 [Docker](https://www.docker.com/) 和 [Docker Compose](https://docs.docker.com/compose/)。
 
 ```bash
 docker compose up --build
 ```
 
-打开 http://localhost:8888/lab/tree/work 即可编辑笔记。
+启动后同时运行两个服务：
 
-- Markdown 单元格写公式（LaTeX 语法）
-- Code 单元格写 C 代码，Shift+Enter 直接编译运行
-- 改个数值重新运行，立刻看到结果
+| 服务 | 地址 | 用途 |
+|------|------|------|
+| Jupyter Lab | http://localhost:8888 | 写笔记、跑 C 代码 |
+| Quarto Preview | http://localhost:4444 | 实时预览渲染后的网站 |
 
-## Quarto 渲染
+工作流：在 Jupyter (8888) 中编辑 notebook，保存后 Quarto (4444) 自动热重载，浏览器刷新即可看到最新渲染结果。
 
-需要 [Quarto](https://quarto.org/)。
+## 在线阅读
 
-```bash
-quarto render        # 输出到 _site/
-quarto preview       # 本地预览
-```
+推送到 `main` 分支后，GitHub Actions 自动将 `_site/` 部署到 GitHub Pages。
 
-## GitHub Pages
+## 技术栈
 
-推送到 `main` 分支后，GitHub Actions 自动渲染并发布。在仓库 Settings → Pages 中将 Source 设为 GitHub Actions 即可。
+- **Jupyter + C Kernel** — Markdown 单元格写 LaTeX 公式，Code 单元格写 C 代码并直接运行
+- **Quarto** — 将 notebook 渲染为静态网站
+- **Docker Compose** — 一键启动完整开发环境
+- **GitHub Pages** — 自动部署
 
-## 项目结构
+## 添加新章节
 
-```
-notebooks/           # Jupyter 笔记本（.ipynb）
-├── 01-basics.ipynb
-docker-compose.yml   # 本地开发环境
-_quarto.yml          # Quarto 配置
-```
+1. 在 `notebooks/` 下新建 `.ipynb` 文件
+2. 在 `_quarto.yml` 的 `chapters` 中添加对应路径
+3. Jupyter 中编辑并运行，Quarto 自动预览
