@@ -1,5 +1,5 @@
 # Quarto output
-_site/
+# _site/
 
 # Jupyter
 .ipynb_checkpoints/
