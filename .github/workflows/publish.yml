@@ -23,7 +23,7 @@ jobs:
       - name: Install C kernel & render notebooks
         run: |
           sudo apt-get update && sudo apt-get install -y libc6-dev
-          pip install jupyter-c-kernel
+          pip install jupyter_client jupyter-c-kernel
           install_c_kernel --user
           printf '#!/bin/bash\nexec /usr/bin/gcc "$@" -lm\n' > /usr/local/bin/gcc && chmod +x /usr/local/bin/gcc
           quarto render
