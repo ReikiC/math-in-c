@@ -1,0 +1,8 @@
+services:
+  jupyter:
+    build: .
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    command: jupyter lab --ip=0.0.0.0 --no-browser --NotebookApp.token=''

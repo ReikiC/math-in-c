@@ -1,0 +1,15 @@
+FROM jupyter/base-notebook:latest
+
+USER root
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libc6-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir jupyter-c-kernel && \
+    install_c_kernel --user && \
+    printf '#!/bin/bash\nexec /usr/bin/gcc "$@" -lm\n' > /usr/local/bin/gcc && \
+    chmod +x /usr/local/bin/gcc
+
+USER ${NB_UID}

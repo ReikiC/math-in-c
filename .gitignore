@@ -1,0 +1,8 @@
+# Quarto output
+_site/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

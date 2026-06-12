@@ -1,0 +1,43 @@
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install C kernel & render notebooks
+        run: |
+          sudo apt-get update && sudo apt-get install -y libc6-dev
+          pip install jupyter-c-kernel
+          install_c_kernel --user
+          printf '#!/bin/bash\nexec /usr/bin/gcc "$@" -lm\n' > /usr/local/bin/gcc && chmod +x /usr/local/bin/gcc
+          quarto render
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

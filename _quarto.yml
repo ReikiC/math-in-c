@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "notebooks/*.ipynb"
+
+website:
+  title: "Math in C"
+  navbar:
+    left:
+      - href: notebooks/01-basics.ipynb
+        text: "01 基础运算"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: false
