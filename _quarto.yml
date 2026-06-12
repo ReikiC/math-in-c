@@ -9,9 +9,8 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
-    - part: "基础"
-      chapters:
-        - notebooks/01-basics.ipynb
+    - notebooks/01-demo.ipynb
+    - notebooks/02-linear-algebra.ipynb
 
 format:
   html:
@@ -19,3 +18,13 @@ format:
     toc: true
     code-fold: false
     page-layout: full
+    include-in-header:
+      text: |
+        <style>
+        body {
+          font-family: "SimSun", "宋体", "Times New Roman", serif;
+        }
+        code, pre, .code {
+          font-family: "Courier New", monospace;
+        }
+        </style>
