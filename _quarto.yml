@@ -1,18 +1,21 @@
 project:
-  type: website
+  type: book
   output-dir: _site
-  render:
-    - "notebooks/*.ipynb"
 
-website:
+book:
   title: "Math in C"
-  navbar:
-    left:
-      - href: notebooks/01-basics.ipynb
-        text: "01 基础运算"
+  author: "Dankao Chen"
+  language: zh
+  page-navigation: true
+  chapters:
+    - index.qmd
+    - part: "基础"
+      chapters:
+        - notebooks/01-basics.ipynb
 
 format:
   html:
     theme: cosmo
     toc: true
     code-fold: false
+    page-layout: full

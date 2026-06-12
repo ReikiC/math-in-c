@@ -1,8 +1,21 @@
 services:
   jupyter:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.jupyter
     ports:
       - "8888:8888"
     volumes:
-      - ./notebooks:/home/jovyan/work
-    command: jupyter lab --ip=0.0.0.0 --no-browser --NotebookApp.token=''
+      - .:/project
+    command: jupyter lab --ip=0.0.0.0 --no-browser --ServerApp.token='' --ServerApp.root_dir=/project
+
+  quarto:
+    build:
+      context: .
+      dockerfile: Dockerfile.quarto
+    ports:
+      - "4444:4444"
+    volumes:
+      - .:/project
+    working_dir: /project
+    command: quarto preview --port 4444 --host 0.0.0.0 --no-browser

@@ -12,4 +12,5 @@ RUN pip install --no-cache-dir jupyter-c-kernel && \
     printf '#!/bin/bash\nexec /usr/bin/gcc "$@" -lm\n' > /usr/local/bin/gcc && \
     chmod +x /usr/local/bin/gcc
 
+
 USER ${NB_UID}
